@@ -1,0 +1,3483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nala Coffee — Kopi Ijen yang Tumbuh dari Kebaikan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================================
+           1. DESIGN TOKENS & VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-cream: #FBF7EF;
+            --bg-card: #FFFFFF;
+            --bg-surface: #F5EFE4;
+            --bg-footer: #F3ECE0;
+            --bg-dark-espresso: #261C14;
+
+            --text-primary: #2C2218;
+            --text-secondary: #6E6254;
+            --text-muted: #9A8D7D;
+            --text-inverse: #FBF7EF;
+
+            --accent-amber: #C68B1B;
+            --accent-amber-hover: #A87312;
+            --accent-amber-soft: #F3E5C8;
+            --accent-sage: #3B523B;
+            --accent-sage-soft: #E5ECE5;
+
+            --border-sand: #E3D9C6;
+            --border-subtle: rgba(44, 34, 24, 0.08);
+
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 22px;
+            --radius-xl: 28px;
+            --radius-pill: 9999px;
+
+            --shadow-soft: 0 10px 30px rgba(44, 34, 24, 0.04);
+            --shadow-card: 0 14px 36px rgba(44, 34, 24, 0.06);
+            --shadow-float: 0 20px 50px rgba(38, 28, 20, 0.14);
+
+            --container-max: 1200px;
+            --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* ==========================================================================
+           2. RESET & BASE STYLES (MOBILE-FIRST)
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        input, select, textarea {
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent-amber);
+            outline-offset: 2px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        /* ==========================================================================
+           3. TYPOGRAPHY & REUSABLE BADGES / BUTTONS
+           ========================================================================== */
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+            margin-bottom: 0.5rem;
+        }
+
+        .pill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background-color: var(--bg-surface);
+            color: var(--accent-amber);
+            border: 1px solid var(--border-sand);
+        }
+
+        .pill-tag--white {
+            background-color: #FFFFFF;
+            color: var(--text-primary);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            border: none;
+        }
+
+        .pill-tag--outline {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-sand);
+        }
+
+        .dot-amber {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--accent-amber);
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .serif-h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.1rem, 4.5vw, 3.25rem);
+            font-weight: 600;
+            line-height: 1.15;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .serif-h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        .serif-h3 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.25rem, 2vw, 1.55rem);
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.65rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: var(--transition);
+            min-height: 44px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-amber);
+            color: #FFFFFF;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-amber-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(198, 139, 27, 0.28);
+        }
+
+        .btn-dark {
+            background-color: var(--text-primary);
+            color: #FFFFFF;
+        }
+
+        .btn-dark:hover {
+            background-color: #1A130D;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-sand);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-surface);
+            border-color: var(--text-primary);
+        }
+
+        .btn-sm {
+            padding: 0.55rem 1.15rem;
+            font-size: 0.72rem;
+            min-height: 38px;
+        }
+
+        /* ==========================================================================
+           4. HEADER & NAVIGATION
+           ========================================================================== */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(251, 247, 239, 0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 78px;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+            cursor: pointer;
+        }
+
+        .nav-desktop {
+            display: none;
+        }
+
+        @media (min-width: 900px) {
+            .nav-desktop {
+                display: flex;
+                align-items: center;
+                gap: 2.25rem;
+            }
+        }
+
+        .nav-link {
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            position: relative;
+            padding: 0.35rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-amber);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-amber);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-cta-desktop {
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .header-cta-desktop {
+                display: inline-flex;
+            }
+        }
+
+        .mobile-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-sand);
+            color: var(--text-primary);
+        }
+
+        @media (min-width: 900px) {
+            .mobile-toggle {
+                display: none;
+            }
+        }
+
+        .mobile-drawer {
+            display: none;
+            background-color: var(--bg-cream);
+            border-bottom: 1px solid var(--border-sand);
+            padding: 1.25rem;
+        }
+
+        .mobile-drawer.open {
+            display: block;
+        }
+
+        .mobile-drawer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .mobile-drawer-links a {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        /* ==========================================================================
+           5. VIEW ROUTING CONTAINERS
+           ========================================================================== */
+        .page-view {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           6. HOME PAGE SECTIONS (FRAME 1.JPG)
+           ========================================================================== */
+        .section-block {
+            padding: 4rem 0;
+        }
+
+        @media (min-width: 1024px) {
+            .section-block {
+                padding: 5.5rem 0;
+            }
+        }
+
+        .section-header-center {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-header-center p {
+            color: var(--text-secondary);
+            margin-top: 0.65rem;
+            font-size: 0.95rem;
+        }
+
+        /* 6.1 Hero Section */
+        .hero-section {
+            padding: 1.25rem 0 3rem;
+        }
+
+        .hero-frame {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            min-height: 520px;
+            background-color: #241911;
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-frame {
+                min-height: 580px;
+                padding: 3rem;
+            }
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: transform 0.8s ease;
+        }
+
+        .hero-overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(95deg, rgba(24, 17, 11, 0.72) 0%, rgba(24, 17, 11, 0.25) 60%, rgba(24, 17, 11, 0.45) 100%);
+        }
+
+        .hero-card {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(251, 247, 239, 0.97);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            max-width: 470px;
+            box-shadow: var(--shadow-float);
+        }
+
+        @media (min-width: 768px) {
+            .hero-card {
+                padding: 2.5rem;
+            }
+        }
+
+        .hero-card h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.9rem, 3.5vw, 2.65rem);
+            line-height: 1.15;
+            color: var(--text-primary);
+            margin: 0.65rem 0 0.85rem;
+        }
+
+        .hero-card h1 em {
+            font-style: italic;
+            color: var(--accent-sage);
+            font-weight: 500;
+        }
+
+        .hero-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-sand);
+        }
+
+        .hero-meta-strip span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .hero-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.35rem;
+        }
+
+        .hero-location-foot {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .hero-slide-badge {
+            position: relative;
+            z-index: 2;
+            margin-top: 1rem;
+            background-color: rgba(251, 247, 239, 0.96);
+            border-radius: var(--radius-md);
+            padding: 0.85rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        @media (min-width: 768px) {
+            .hero-slide-badge {
+                position: absolute;
+                right: 2.5rem;
+                bottom: 2.5rem;
+                margin-top: 0;
+            }
+        }
+
+        .hero-slide-num {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .hero-slide-controls button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--border-sand);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .hero-slide-controls button:hover {
+            background-color: var(--accent-amber);
+            color: #FFF;
+            border-color: var(--accent-amber);
+        }
+
+        /* 6.2 Philosophy 3-Column Cards */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .philosophy-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .pillar-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem 1.75rem;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .pillar-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--bg-surface);
+            color: var(--accent-amber);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.15rem;
+        }
+
+        .pillar-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .pillar-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .pillar-meta {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+        }
+
+        /* 6.3 Featured Product Spotlights (Arabika Wine & Robusta Ijen) */
+        .spotlight-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+        }
+
+        .spotlight-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .spotlight-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @media (min-width: 900px) {
+            .spotlight-card {
+                grid-template-columns: 360px 1fr;
+                padding: 2.25rem;
+                gap: 2.75rem;
+                align-items: center;
+            }
+        }
+
+        /* Custom Coded Figma Packaging Art Cards */
+        .pkg-artwork {
+            border-radius: var(--radius-lg);
+            padding: 1.65rem 1.35rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 390px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .pkg-artwork--wine {
+            background: linear-gradient(160deg, #F3EDF7 0%, #E3D6EC 55%, #6A3380 55.5%, #512264 100%);
+        }
+
+        .pkg-artwork--robusta {
+            background: linear-gradient(160deg, #EDF2EE 0%, #DCE5DE 55%, #1E241E 55.5%, #141814 100%);
+        }
+
+        .pkg-artwork--blue {
+            background: linear-gradient(160deg, #EBF2F5 0%, #D6E4EB 55%, #1582B8 55.5%, #0E6794 100%);
+        }
+
+        .pkg-art-head {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .pkg-art-title {
+            font-family: var(--font-serif);
+            font-size: 1.85rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .pkg-artwork--wine .pkg-art-title { color: #5B2870; }
+        .pkg-artwork--robusta .pkg-art-title { color: #273827; }
+        .pkg-artwork--blue .pkg-art-title { color: #0F75A8; }
+
+        .pkg-art-sub {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #6B645C;
+            margin-top: 0.25rem;
+        }
+
+        .pkg-art-body {
+            display: grid;
+            grid-template-columns: 115px 1fr;
+            gap: 0.9rem;
+            align-items: center;
+            margin-top: 1.25rem;
+            z-index: 2;
+        }
+
+        .coffee-pouch {
+            background: #141414;
+            border-radius: 10px 10px 14px 14px;
+            padding: 0.75rem 0.55rem;
+            color: #FFF;
+            box-shadow: 0 14px 24px rgba(0, 0, 0, 0.35);
+            border-top: 4px solid #292929;
+            text-align: center;
+        }
+
+        .pouch-brand {
+            font-family: var(--font-serif);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.35rem;
+            color: #F5EFE4;
+        }
+
+        .pouch-graphic {
+            height: 62px;
+            border-radius: 6px;
+            margin-bottom: 0.45rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .pkg-artwork--wine .pouch-graphic {
+            background: radial-gradient(circle at 30% 30%, #A962C4, #431954);
+        }
+
+        .pkg-artwork--robusta .pouch-graphic {
+            background: radial-gradient(circle at 40% 40%, #8C6239, #2E1F12);
+        }
+
+        .pkg-artwork--blue .pouch-graphic {
+            background: radial-gradient(circle at 50% 30%, #3CA6DB, #132A38);
+        }
+
+        .pouch-label-bar {
+            background: #F5EFE4;
+            color: #1A1A1A;
+            font-size: 0.52rem;
+            font-weight: 700;
+            padding: 0.25rem;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .pkg-spec-list {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(6px);
+            border-radius: 12px;
+            padding: 0.75rem;
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #3A322A;
+            display: flex;
+            flex-direction: column;
+            gap: 0.32rem;
+        }
+
+        .pkg-dots-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.35rem;
+        }
+
+        .dots-group {
+            display: inline-flex;
+            gap: 3px;
+        }
+
+        .dot-spec {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #D8D0C5;
+        }
+
+        .pkg-artwork--wine .dot-spec.filled { background-color: #6A3380; }
+        .pkg-artwork--robusta .dot-spec.filled { background-color: #2B3B2B; }
+        .pkg-artwork--blue .dot-spec.filled { background-color: #1582B8; }
+
+        .spotlight-info-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.75rem, 2.8vw, 2.2rem);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .spotlight-origin {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .spotlight-desc {
+            color: var(--text-secondary);
+            font-size: 0.94rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.35rem;
+        }
+
+        .tag-chip {
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-sand);
+            background-color: var(--bg-cream);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+
+        .tag-chip--amber {
+            background-color: var(--accent-amber-soft);
+            border-color: transparent;
+            color: #8A5D0B;
+        }
+
+        /* Accordion Rows inside Spotlight */
+        .spec-accordion {
+            border-top: 1px solid var(--border-sand);
+            margin-top: 1rem;
+        }
+
+        .spec-acc-item {
+            border-bottom: 1px solid var(--border-sand);
+        }
+
+        .spec-acc-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 0;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        .spec-acc-panel {
+            display: none;
+            padding-bottom: 0.9rem;
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+        }
+
+        .spec-acc-item.open .spec-acc-panel {
+            display: block;
+        }
+
+        /* 6.4 Product Catalog Grid */
+        .catalog-toolbar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .catalog-toolbar {
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: space-between;
+            }
+        }
+
+        .filter-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-pill {
+            padding: 0.5rem 1.1rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-sand);
+            background-color: var(--bg-card);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .filter-pill.active, .filter-pill:hover {
+            background-color: var(--accent-amber);
+            border-color: var(--accent-amber);
+            color: #FFFFFF;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .product-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .product-card .pkg-artwork {
+            min-height: 230px;
+            padding: 1.1rem;
+            margin-bottom: 1.15rem;
+        }
+
+        .product-card .pkg-art-title {
+            font-size: 1.35rem;
+        }
+
+        .product-card .pkg-art-body {
+            grid-template-columns: 82px 1fr;
+            margin-top: 0.75rem;
+        }
+
+        .product-card-meta {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+            margin-bottom: 0.25rem;
+        }
+
+        .product-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .product-card p {
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-card-price {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+
+        .pagination-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.45rem;
+            margin-top: 1.75rem;
+        }
+
+        .page-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border-sand);
+            background-color: var(--bg-card);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .page-btn.active, .page-btn:hover {
+            background-color: var(--accent-amber);
+            border-color: var(--accent-amber);
+            color: #FFFFFF;
+        }
+
+        /* 6.5 Journal Section (Jurnal Nala) */
+        .journal-top-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .journal-top-bar {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.65rem 1rem 0.65rem 2.4rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-sand);
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .journal-featured-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        @media (min-width: 900px) {
+            .journal-featured-card {
+                grid-template-columns: 1.1fr 1fr;
+            }
+        }
+
+        .journal-featured-card:hover {
+            box-shadow: var(--shadow-card);
+            transform: translateY(-2px);
+        }
+
+        .journal-featured-img {
+            height: 260px;
+            width: 100%;
+        }
+
+        @media (min-width: 900px) {
+            .journal-featured-img {
+                height: 100%;
+                min-height: 310px;
+            }
+        }
+
+        .journal-featured-body {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .journal-featured-body {
+                padding: 2.5rem;
+            }
+        }
+
+        .journal-subgrid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .journal-subgrid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .journal-mini-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .journal-mini-card:hover {
+            border-color: var(--accent-amber);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .journal-mini-thumb {
+            width: 84px;
+            height: 84px;
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+        }
+
+        .journal-mini-info h4 {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            line-height: 1.3;
+            margin: 0.2rem 0 0.35rem;
+        }
+
+        .journal-mini-info span.meta {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* 6.6 Gallery Section (Yang Kami Jaga di Lereng Ijen) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 960px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            height: 230px;
+            cursor: pointer;
+            border: 1px solid var(--border-sand);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 1.25rem 1rem 0.85rem;
+            background: linear-gradient(to top, rgba(24, 17, 11, 0.82), transparent);
+            color: #FFF;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        /* 6.7 Farmer Spotlight Section */
+        .farmer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+            align-items: stretch;
+        }
+
+        @media (min-width: 900px) {
+            .farmer-grid {
+                grid-template-columns: 1.15fr 1fr;
+            }
+        }
+
+        .farmer-photo-wrap {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            min-height: 310px;
+        }
+
+        .farmer-photo-wrap img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .farmer-photo-badge {
+            position: absolute;
+            left: 1.25rem;
+            bottom: 1.25rem;
+        }
+
+        .farmer-metrics-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .metrics-trio {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--border-sand);
+        }
+
+        .metric-val {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-lbl {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* 6.8 Process Steps + Brew FAQ */
+        .process-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 960px) {
+            .process-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .process-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .process-step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--accent-amber-soft);
+            color: var(--accent-amber);
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.9rem;
+        }
+
+        .process-card h4 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .process-card p {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+        }
+
+        .brew-faq-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+
+        /* 6.9 Direct Order & B2B Forms */
+        .split-form-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.25rem;
+            align-items: center;
+        }
+
+        @media (min-width: 900px) {
+            .split-form-section {
+                grid-template-columns: 1fr 1.05fr;
+                gap: 3.5rem;
+            }
+        }
+
+        .checklist-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-top: 1.5rem;
+        }
+
+        .check-row-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-md);
+            padding: 0.95rem 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .check-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: var(--accent-amber-soft);
+            color: var(--accent-amber);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .order-dark-frame {
+            position: relative;
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            background: linear-gradient(rgba(30, 21, 14, 0.72), rgba(30, 21, 14, 0.82)),
+                        url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=900&q=80') center/cover;
+        }
+
+        @media (min-width: 768px) {
+            .order-dark-frame {
+                padding: 2.25rem;
+            }
+        }
+
+        .form-card-light {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.9rem;
+        }
+
+        @media (min-width: 600px) {
+            .form-grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 0.95rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.35rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.72rem 0.95rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-sand);
+            background-color: var(--bg-cream);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-amber);
+            background-color: #FFFFFF;
+        }
+
+        .b2b-contact-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ==========================================================================
+           7. PRODUCT DETAIL VIEW (PRODUK 1, 2, 3)
+           ========================================================================== */
+        .detail-page-wrap {
+            padding: 2.25rem 0 4.5rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin: 0.85rem 0 1.75rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--accent-amber);
+        }
+
+        .product-detail-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @media (min-width: 900px) {
+            .product-detail-box {
+                grid-template-columns: 410px 1fr;
+                padding: 2.5rem;
+                gap: 3rem;
+                align-items: start;
+            }
+        }
+
+        .product-detail-box .pkg-artwork {
+            min-height: 440px;
+        }
+
+        .weight-selector-pill {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            padding: 0.3rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border-sand);
+            background-color: var(--bg-cream);
+        }
+
+        .weight-opt {
+            padding: 0.3rem 0.65rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .weight-opt.active {
+            background-color: var(--accent-amber);
+            color: #FFFFFF;
+        }
+
+        .karakter-block {
+            margin: 1.75rem 0;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-sand);
+        }
+
+        .karakter-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 0.9rem;
+        }
+
+        .stat-bar-row {
+            display: grid;
+            grid-template-columns: 75px 1fr 42px;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .stat-bar-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+        }
+
+        .stat-bar-track {
+            height: 6px;
+            border-radius: var(--radius-pill);
+            background-color: #EAE2D3;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: var(--radius-pill);
+            background-color: var(--accent-amber);
+            transition: width 0.5s ease;
+        }
+
+        .stat-bar-val {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        .detail-price-cta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-top: 1.25rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--border-sand);
+        }
+
+        .detail-price-text {
+            font-family: var(--font-serif);
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* ==========================================================================
+           8. JOURNAL DETAIL VIEW (JURNAL 1 - 5)
+           ========================================================================== */
+        .journal-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.25rem;
+            margin-top: 1.75rem;
+        }
+
+        @media (min-width: 960px) {
+            .journal-detail-grid {
+                grid-template-columns: 1.45fr 1fr;
+                gap: 3rem;
+                align-items: start;
+            }
+        }
+
+        .journal-hero-media {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            height: 290px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @media (min-width: 768px) {
+            .journal-hero-media {
+                height: 390px;
+            }
+        }
+
+        .journal-hero-media img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .journal-location-badge {
+            position: absolute;
+            left: 1.25rem;
+            bottom: 1.25rem;
+        }
+
+        .journal-article-copy h2 {
+            font-family: var(--font-serif);
+            font-size: 1.65rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .journal-article-copy p {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.75;
+            margin-bottom: 1.15rem;
+        }
+
+        .journal-sidebar-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .journal-sidebar-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.55rem;
+            line-height: 1.25;
+            margin: 0.45rem 0 0.85rem;
+        }
+
+        .journal-sidebar-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        .journal-meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding-top: 1.35rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--border-sand);
+        }
+
+        .j-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .j-meta-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--accent-amber-soft);
+            color: var(--accent-amber);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .j-meta-lbl {
+            display: block;
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .j-meta-val {
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .next-article-box {
+            margin-top: 2.25rem;
+        }
+
+        .next-article-card {
+            margin-top: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .next-article-card:hover {
+            border-color: var(--accent-amber);
+            transform: translateX(4px);
+        }
+
+        .next-article-card img {
+            width: 96px;
+            height: 76px;
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+        }
+
+        /* ==========================================================================
+           9. GLOBAL FOOTER (IDENTICAL ACROSS ALL 9 SCREENS)
+           ========================================================================== */
+        .site-footer {
+            background-color: var(--bg-footer);
+            border-top: 1px solid var(--border-sand);
+            padding: 3.5rem 0 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-sand);
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1.35fr 1fr 1.15fr 1.15fr;
+                gap: 2rem;
+            }
+        }
+
+        .footer-tagline {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            margin-top: 0.65rem;
+        }
+
+        .footer-col-title-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 0.85rem;
+        }
+
+        .footer-col-title-serif {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.65rem;
+        }
+
+        .footer-nav-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .footer-nav-inline a:hover {
+            color: var(--accent-amber);
+        }
+
+        .footer-text-list {
+            font-size: 0.84rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding-top: 1.35rem;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        /* ==========================================================================
+           10. MODALS & TOAST NOTIFICATIONS
+           ========================================================================== */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background-color: rgba(24, 17, 11, 0.65);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-dialog {
+            background-color: var(--bg-cream);
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-xl);
+            max-width: 480px;
+            width: 100%;
+            padding: 1.75rem;
+            position: relative;
+            box-shadow: var(--shadow-float);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.15rem;
+            right: 1.15rem;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .qty-control {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--border-sand);
+            border-radius: var(--radius-pill);
+            background-color: #FFF;
+            overflow: hidden;
+        }
+
+        .qty-control button {
+            width: 34px;
+            height: 34px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .qty-control span {
+            padding: 0 0.85rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 300;
+            background-color: var(--text-primary);
+            color: #FFF;
+            padding: 0.95rem 1.35rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-float);
+            font-size: 0.86rem;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            transform: translateY(140%);
+            transition: transform 0.3s ease;
+            max-width: 360px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ======================================================================
+         HEADER & NAVIGATION
+         ====================================================================== -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#home" class="brand-logo" onclick="navigateTo('home'); return false;" aria-label="Nala Coffee Beranda">
+                <!-- Custom SVG Nala Wordmark matching Figma -->
+                <svg width="88" height="36" viewBox="0 0 110 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 35V9H14.5L27.5 26.5V9H33.5V35H27.5L14 17V35H8Z" fill="#B59B78"/>
+                    <path d="M18 11C21 7 26 7 28 11C24 11 21 12 18 11Z" fill="#C68B1B"/>
+                    <text x="35" y="35" fill="#B59B78" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="31" letter-spacing="-0.03em">ala</text>
+                </svg>
+            </a>
+
+            <nav class="nav-desktop" aria-label="Navigasi Utama">
+                <a href="#cerita" class="nav-link" data-section="cerita" onclick="navigateTo('home', 'cerita'); return false;">Cerita</a>
+                <a href="#kopi" class="nav-link" data-section="kopi" onclick="navigateTo('home', 'kopi'); return false;">Kopi</a>
+                <a href="#proses" class="nav-link" data-section="proses" onclick="navigateTo('home', 'proses'); return false;">Proses</a>
+                <a href="#petani" class="nav-link" data-section="petani" onclick="navigateTo('home', 'petani'); return false;">Petani</a>
+                <a href="#mitra" class="nav-link" data-section="mitra" onclick="navigateTo('home', 'mitra'); return false;">Mitra</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#pesan" class="btn btn-primary btn-sm header-cta-desktop" onclick="navigateTo('home', 'pesan'); return false;">Hubungi Nala</a>
+                <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Buka Menu Navigasi" aria-expanded="false">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="7" x2="21" y2="7"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="17" x2="21" y2="17"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div class="mobile-drawer" id="mobileDrawer">
+            <div class="mobile-drawer-links">
+                <a href="#cerita" onclick="closeMobileMenu(); navigateTo('home', 'cerita'); return false;">Cerita</a>
+                <a href="#kopi" onclick="closeMobileMenu(); navigateTo('home', 'kopi'); return false;">Kopi</a>
+                <a href="#proses" onclick="closeMobileMenu(); navigateTo('home', 'proses'); return false;">Proses</a>
+                <a href="#petani" onclick="closeMobileMenu(); navigateTo('home', 'petani'); return false;">Petani</a>
+                <a href="#mitra" onclick="closeMobileMenu(); navigateTo('home', 'mitra'); return false;">Mitra</a>
+            </div>
+            <a href="#pesan" class="btn btn-primary" style="width:100%;" onclick="closeMobileMenu(); navigateTo('home', 'pesan'); return false;">Hubungi Nala</a>
+        </div>
+    </header>
+
+    <!-- ======================================================================
+         VIEW 1: MAIN LANDING PAGE (FRAME 1.JPG)
+         ====================================================================== -->
+    <main id="view-home" class="page-view active">
+
+        <!-- 1. HERO SECTION -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-frame">
+                    <img id="heroBgImg" class="hero-bg-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80" alt="Suasana penyeduhan kopi Nala Roastery">
+                    <div class="hero-overlay-gradient"></div>
+
+                    <div class="hero-card">
+                        <span class="pill-tag" id="heroEyebrow">KOPI SPECIALTY JAVA IJEN</span>
+                        <h1 id="heroTitle">Rasakan Kebaikan <em>dari Lereng Ijen</em></h1>
+                        <p id="heroDesc">Biji kopi pilihan dari dataran tinggi vulkanik Bondowoso, dirawat oleh petani lokal dan disangrai dengan penuh ketelitian untuk menjaga kejujuran rasa.</p>
+
+                        <div class="hero-meta-strip">
+                            <span><i class="dot-amber"></i> 100% Single Origin</span>
+                            <span><i class="dot-amber"></i> Petik Merah Pilihan</span>
+                            <span><i class="dot-amber"></i> Fresh Roast</span>
+                        </div>
+
+                        <div class="hero-cta-row">
+                            <a href="#kopi" class="btn btn-dark btn-sm" onclick="navigateTo('home', 'kopi'); return false;">Jelajahi Kopi</a>
+                            <a href="#jurnal" class="btn btn-outline btn-sm" onclick="navigateTo('home', 'jurnal'); return false;">Baca Cerita</a>
+                        </div>
+
+                        <div class="hero-location-foot">
+                            <span class="dot-amber"></span>
+                            <span id="heroLocation">IJEN JAVA, BONDOWOSO</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-slide-badge">
+                        <div>
+                            <div class="hero-slide-num" id="heroSlideCounter">01 / 04</div>
+                            <div style="font-size:0.68rem; color:var(--text-muted);" id="heroSlideCaption">Roastery &amp; Kebun Ijen</div>
+                        </div>
+                        <div class="hero-slide-controls">
+                            <button type="button" onclick="changeHeroSlide(-1)" aria-label="Slide sebelumnya">&#8249;</button>
+                            <button type="button" onclick="changeHeroSlide(1)" aria-label="Slide berikutnya">&#8250;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. BRAND PHILOSOPHY ("Lebih dari secangkir kopi") -->
+        <section id="cerita" class="section-block">
+            <div class="container">
+                <div class="section-header-center">
+                    <span class="eyebrow">FILOSOFI NALA</span>
+                    <h2 class="serif-h2">Lebih dari secangkir kopi</h2>
+                    <p>Setiap cangkir adalah pertemuan antara tanah vulkanik Ijen, kesabaran petani, dan proses sangrai yang menghormati karakter asli biji.</p>
+                </div>
+
+                <div class="philosophy-grid">
+                    <article class="pillar-card">
+                        <div class="pillar-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Tanah Vulkanik</h3>
+                        <p>Tumbuh di ketinggian 800–1.600 mdpl lereng Gunung Ijen dengan mineral tanah subur dan mikroklimat sejuk.</p>
+                        <div class="pillar-meta">BONDOWOSO, JAWA TIMUR</div>
+                    </article>
+
+                    <article class="pillar-card">
+                        <div class="pillar-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>Tangan Petani</h3>
+                        <p>Kemitraan langsung bersama Kelompok Usaha Bersama Bondowoso untuk memastikan panen petik merah dan kesejahteraan adil.</p>
+                        <div class="pillar-meta">KEMITRAAN BERKELANJUTAN</div>
+                    </article>
+
+                    <article class="pillar-card">
+                        <div class="pillar-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <h3>Sangrai Terukur</h3>
+                        <p>Profil roasting disesuaikan dengan karakter tiap varietas agar aroma buah, cokelat, dan manis alami muncul seimbang.</p>
+                        <div class="pillar-meta">SMALL BATCH ROASTERY</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. FEATURED PRODUCT SPOTLIGHTS -->
+        <section class="section-block" style="padding-top: 1rem;">
+            <div class="container spotlight-wrapper">
+
+                <!-- Spotlight 1: Arabika Wine -->
+                <div>
+                    <div class="spotlight-header">
+                        <span class="eyebrow">KOLEKSI UNGGULAN</span>
+                        <h3 class="serif-h3">Karakter fermentasi alami yang kaya aroma</h3>
+                    </div>
+
+                    <div class="spotlight-card">
+                        <div class="pkg-artwork pkg-artwork--wine">
+                            <div class="pkg-art-head">
+                                <div class="pkg-art-title">Arabika Wine</div>
+                                <div class="pkg-art-sub">IJEN JAVA, BONDOWOSO</div>
+                            </div>
+                            <div class="pkg-art-body">
+                                <div class="coffee-pouch">
+                                    <div class="pouch-brand">Nala</div>
+                                    <div class="pouch-graphic">WINE</div>
+                                    <div class="pouch-label-bar">ARABICA WINE</div>
+                                </div>
+                                <div class="pkg-spec-list">
+                                    <div>100% ARABIKA</div>
+                                    <div>WINE PROCESSING</div>
+                                    <div>MIX VARIETY</div>
+                                    <div>MEDIUM ROAST</div>
+                                    <div>1000-1300 MASL</div>
+                                    <div class="pkg-dots-row">
+                                        <span>BODY</span>
+                                        <span class="dots-group"><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec"></i><i class="dot-spec"></i></span>
+                                    </div>
+                                    <div class="pkg-dots-row">
+                                        <span>ACIDITY</span>
+                                        <span class="dots-group"><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec"></i><i class="dot-spec"></i></span>
+                                    </div>
+                                    <div class="pkg-dots-row">
+                                        <span>FRUITY</span>
+                                        <span class="dots-group"><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="spotlight-info-title">ARABIKA WINE</h3>
+                            <div class="spotlight-origin">IJEN JAVA, BONDOWOSO · 1.200–1.400 MDPL</div>
+                            <p class="spotlight-desc">Arabika Wine Ijen adalah hasil dari proses alami yang unik. Biji kopi difermentasi alami dalam ceri selama satu bulan, hingga rasa manis buah dan keasaman khas muncul secara natural.</p>
+
+                            <div class="tag-row">
+                                <span class="tag-chip">100% ARABIKA</span>
+                                <span class="tag-chip">MEDIUM ROAST</span>
+                                <span class="tag-chip">WINE PROCESS</span>
+                                <span class="tag-chip tag-chip--amber">RP 95.000</span>
+                            </div>
+
+                            <div class="spec-accordion">
+                                <div class="spec-acc-item open">
+                                    <button type="button" class="spec-acc-btn" onclick="toggleAccordion(this)">
+                                        <span>Catatan Rasa &amp; Aroma (Tasting Notes)</span>
+                                        <span>+</span>
+                                    </button>
+                                    <div class="spec-acc-panel">Fermented berry, red grape, manis madu hutan, dengan tingkat keasaman cerah (6/10) dan fruity tinggi (8/10).</div>
+                                </div>
+                                <div class="spec-acc-item">
+                                    <button type="button" class="spec-acc-btn" onclick="toggleAccordion(this)">
+                                        <span>Rekomendasi Metode Seduh</span>
+                                        <span>+</span>
+                                    </button>
+                                    <div class="spec-acc-panel">Sangat ideal untuk V60 Pour Over, Kalita Wave, Aeropress, maupun Japanese Iced Coffee pada suhu 90–92°C.</div>
+                                </div>
+                                <div class="spec-acc-item">
+                                    <button type="button" class="spec-acc-btn" onclick="toggleAccordion(this)">
+                                        <span>Pilihan Kemasan &amp; Berat</span>
+                                        <span>+</span>
+                                    </button>
+                                    <div class="spec-acc-panel">Tersedia dalam kemasan 100g, 200g, 500g, dan 1kg (Biji Utuh / Giling sesuai permintaan).</div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 1.35rem; display:flex; flex-wrap:wrap; gap:0.75rem;">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="openOrderModal('arabica-wine')">Beli Sekarang</button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="navigateTo('product', 'arabica-wine')">Lihat Detail Produk</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spotlight 2: Robusta Ijen -->
+                <div>
+                    <div class="spotlight-header">
+                        <span class="eyebrow">KARAKTER TEGAS</span>
+                        <h3 class="serif-h3">Keseimbangan kopi pilihan untuk setiap hari</h3>
+                    </div>
+
+                    <div class="spotlight-card">
+                        <div class="pkg-artwork pkg-artwork--robusta">
+                            <div class="pkg-art-head">
+                                <div class="pkg-art-title">Robusta Ijen</div>
+                                <div class="pkg-art-sub">IJEN JAVA, BONDOWOSO</div>
+                            </div>
+                            <div class="pkg-art-body">
+                                <div class="coffee-pouch">
+                                    <div class="pouch-brand">Nala</div>
+                                    <div class="pouch-graphic">ROBUSTA</div>
+                                    <div class="pouch-label-bar">ROBUSTA IJEN</div>
+                                </div>
+                                <div class="pkg-spec-list">
+                                    <div>100% ROBUSTA</div>
+                                    <div>FULLWASH PROCESSING</div>
+                                    <div>MIX VARIETY</div>
+                                    <div>MEDIUM ROAST</div>
+                                    <div>800-1000 MASL</div>
+                                    <div class="pkg-dots-row">
+                                        <span>BODY</span>
+                                        <span class="dots-group"><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec filled"></i><i class="dot-spec"></i></span>
+                                    </div>
+                                    <div class="pkg-dots-row">
+                                        <span>ACIDITY</span>
+                                        <span class="dots-group"><i class="dot-spec filled"></i><i class="dot-spec"></i><i class="dot-spec"></i><i class="dot-spec"></i><i class="dot-spec"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="spotlight-info-title">ROBUSTA IJEN</h3>
+                            <div class="spotlight-origin">IJEN JAVA, BONDOWOSO · 800–1.000 MDPL</div>
+                            <p class="spotlight-desc">Robusta Ijen menghadirkan karakter kopi yang tegas dan tumbuh di dataran tinggi Ijen, Bondowoso. Proses fullwash menjaga cita rasa bersih dengan aroma panggang yang khas.</p>
+
+                            <div class="tag-row">
+                                <span class="tag-chip">100% ROBUSTA</span>
+                                <span class="tag-chip">MEDIUM ROAST</span>
+                                <span class="tag-chip">FULLWASH</span>
+                                <span class="tag-chip tag-chip--amber">RP 70.000</span>
+                            </div>
+
+                            <div class="spec-accordion">
+                                <div class="spec-acc-item open">
+                                    <button type="button" class="spec-acc-btn" onclick="toggleAccordion(this)">
+                                        <span>Catatan Rasa &amp; Body</span>
+                                        <span>+</span>
+                                    </button>
+                                    <div class="spec-acc-panel">Dark chocolate, roasted hazelnut, gula aren, dengan body tebal (8/10) dan aftertaste bersih.</div>
+                                </div>
+                                <div class="spec-acc-item">
+                                    <button type="button" class="spec-acc-btn" onclick="toggleAccordion(this)">
+                                        <span>Rekomendasi Penyajian</span>
+                                        <span>+</span>
+                                    </button>
+                                    <div class="spec-acc-panel">Cocok untuk Espresso base, Kopi Susu Gula Aren, Tubruk klasik, maupun Moka Pot.</div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 1.35rem; display:flex; flex-wrap:wrap; gap:0.75rem;">
+                                <button type="button" class="btn btn-primary btn-sm" onclick="openOrderModal('robusta-ijen')">Beli Sekarang</button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="navigateTo('product', 'robusta-ijen')">Lihat Detail Produk</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. PRODUCT CATALOG ("Produk Pilihan Nala") -->
+        <section id="kopi" class="section-block">
+            <div class="container">
+                <div class="catalog-toolbar">
+                    <div>
+                        <span class="eyebrow">KATALOG KOPI</span>
+                        <h2 class="serif-h2">Produk Pilihan Nala</h2>
+                    </div>
+                    <div class="filter-pills" role="tablist" aria-label="Filter Kategori Kopi">
+                        <button type="button" class="filter-pill active" onclick="filterProducts('all', this)">Semua</button>
+                        <button type="button" class="filter-pill" onclick="filterProducts('arabika', this)">Arabika</button>
+                        <button type="button" class="filter-pill" onclick="filterProducts('robusta', this)">Robusta</button>
+                        <button type="button" class="filter-pill" onclick="filterProducts('special', this)">Anaerob / Wine</button>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="catalogGrid">
+                    <!-- Rendered dynamically by JS -->
+                </div>
+
+                <div class="pagination-row" aria-label="Navigasi Halaman Produk">
+                    <button type="button" class="page-btn active" onclick="setCatalogPage(1, this)">1</button>
+                    <button type="button" class="page-btn" onclick="setCatalogPage(2, this)">2</button>
+                    <button type="button" class="page-btn" onclick="setCatalogPage(2)" aria-label="Halaman berikutnya">&#8250;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. JOURNAL SECTION ("Jurnal Nala") -->
+        <section id="jurnal" class="section-block" style="background-color: var(--bg-surface); border-top:1px solid var(--border-sand); border-bottom:1px solid var(--border-sand);">
+            <div class="container">
+                <div class="journal-top-bar">
+                    <div>
+                        <span class="eyebrow">CERITA &amp; EDUKASI</span>
+                        <h2 class="serif-h2">Jurnal Nala</h2>
+                    </div>
+                    <div class="search-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="search" id="journalSearchInput" placeholder="Cari artikel jurnal..." aria-label="Cari artikel jurnal" oninput="filterJournalCards(this.value)">
+                    </div>
+                </div>
+
+                <!-- Featured Main Article Card (JURNAL 5) -->
+                <article class="journal-featured-card" onclick="navigateTo('journal', 'jurnal-5')">
+                    <img class="journal-featured-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80" alt="Petani memetik ceri kopi merah di Lereng Ijen">
+                    <div class="journal-featured-body">
+                        <span class="pill-tag" style="width:fit-content; margin-bottom:0.85rem;">CERITA NALA · 4 MENIT BACA</span>
+                        <h3 class="serif-h3" style="margin-bottom:0.75rem;">Dari Lereng Ijen, Secangkir Kopi yang Punya Cerita</h3>
+                        <p style="color:var(--text-secondary); font-size:0.92rem; margin-bottom:1.25rem;">Di lereng Ijen, Bondowoso, pagi datang bersama udara sejuk dan embun yang perlahan menghilang dari daun kopi. Nala percaya kualitas bukan hanya soal rasa, melainkan siapa yang merawatnya.</p>
+                        <span style="font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-amber);">Baca Selengkapnya &rarr;</span>
+                    </div>
+                </article>
+
+                <!-- 4 Sub-Articles Grid (JURNAL 1 - 4) -->
+                <div class="journal-subgrid" id="journalSubgrid">
+                    <!-- Rendered dynamically by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. PHOTO GALLERY ("Yang Kami Jaga di Lereng Ijen") -->
+        <section class="section-block">
+            <div class="container">
+                <div class="catalog-toolbar">
+                    <div>
+                        <span class="eyebrow">DOKUMENTASI LAPANGAN</span>
+                        <h2 class="serif-h2">Yang Kami Jaga di Lereng Ijen</h2>
+                    </div>
+                    <div class="filter-pills">
+                        <button type="button" class="filter-pill active" onclick="filterGallery('all', this)">Semua</button>
+                        <button type="button" class="filter-pill" onclick="filterGallery('kebun', this)">Kebun &amp; Panen</button>
+                        <button type="button" class="filter-pill" onclick="filterGallery('proses', this)">Pasca Panen</button>
+                        <button type="button" class="filter-pill" onclick="filterGallery('roastery', this)">Roastery</button>
+                    </div>
+                </div>
+
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Rendered dynamically by JS -->
+                </div>
+
+                <div class="pagination-row">
+                    <button type="button" class="page-btn active" onclick="filterGallery('all')">1</button>
+                    <button type="button" class="page-btn" onclick="filterGallery('kebun')">2</button>
+                    <button type="button" class="page-btn" onclick="filterGallery('roastery')" aria-label="Berikutnya">&#8250;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. FARMER SPOTLIGHT SECTION -->
+        <section id="petani" class="section-block" style="padding-top: 1rem;">
+            <div class="container">
+                <div style="max-width: 720px; margin-bottom: 2rem;">
+                    <span class="eyebrow">PETANI &amp; ASAL USUL</span>
+                    <h2 class="serif-h2">Setiap pagi di lereng Ijen, ada tangan yang lebih dulu merawat sebelum menyeduh.</h2>
+                </div>
+
+                <div class="farmer-grid">
+                    <div class="farmer-photo-wrap">
+                        <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?auto=format&fit=crop&w=900&q=80" alt="Ceri kopi merah hasil panen petani Bondowoso">
+                        <div class="farmer-photo-badge">
+                            <span class="pill-tag pill-tag--white"><i class="dot-amber"></i> LERENG IJEN, BONDOWOSO</span>
+                        </div>
+                    </div>
+
+                    <div class="farmer-metrics-card">
+                        <div>
+                            <span class="eyebrow">KELOMPOK USAHA BERSAMA</span>
+                            <h3 class="serif-h3" style="margin-bottom:0.85rem;">Panen selektif untuk menjaga karakter tanah</h3>
+                            <p style="color:var(--text-secondary); font-size:0.92rem; margin-bottom:0.85rem;">Petani mitra Nala memetik buah kopi hanya saat matang sempurna (petik merah). Praktik pemangkasan rutin dan naungan alami menjaga kesuburan tanah pegunungan Ijen lintas musim.</p>
+                            <p style="color:var(--text-secondary); font-size:0.92rem;">Setiap lot dicatat asal blok kebunnya sehingga penikmat kopi dapat menelusuri jejak rasa hingga ke hulunya.</p>
+                        </div>
+
+                        <div class="metrics-trio">
+                            <div>
+                                <div class="metric-val">1.400+</div>
+                                <div class="metric-lbl">MDPL Ketinggian</div>
+                            </div>
+                            <div>
+                                <div class="metric-val">100%</div>
+                                <div class="metric-lbl">Petik Merah</div>
+                            </div>
+                            <div>
+                                <div class="metric-val">12–15 Ton</div>
+                                <div class="metric-lbl">Kapasitas Musiman</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. PROCESS & BREW GUIDE -->
+        <section id="proses" class="section-block">
+            <div class="container">
+                <div class="section-header-center">
+                    <span class="eyebrow">PROSES NALA</span>
+                    <h2 class="serif-h2">Dirawat pelan-pelan, supaya rasanya sampai dengan benar.</h2>
+                </div>
+
+                <div class="process-grid">
+                    <div class="process-card">
+                        <span class="process-step-num">01</span>
+                        <h4>Seleksi Petik Merah</h4>
+                        <p>Hanya ceri kopi matang sempurna yang dipetik secara manual untuk memastikan kadar gula alami optimal.</p>
+                    </div>
+                    <div class="process-card">
+                        <span class="process-step-num">02</span>
+                        <h4>Fermentasi &amp; Cuci</h4>
+                        <p>Diproses melalui metode Fullwash, Natural Anaerob 150 jam, maupun Wine Process dengan kontrol ketat.</p>
+                    </div>
+                    <div class="process-card">
+                        <span class="process-step-num">03</span>
+                        <h4>Pengeringan &amp; Sortasi</h4>
+                        <p>Dijemur bertahap di atas para-para hingga kadar air ideal 11–12%, lalu disortir manual per biji.</p>
+                    </div>
+                    <div class="process-card">
+                        <span class="process-step-num">04</span>
+                        <h4>Profil Sangrai Presisi</h4>
+                        <p>Disangrai dalam batch kecil di roastery Bondowoso untuk menonjolkan karakter autentik Java Ijen.</p>
+                    </div>
+                </div>
+
+                <div class="brew-faq-box">
+                    <div style="margin-bottom: 0.75rem;">
+                        <span class="eyebrow">PANDUAN SEDUH</span>
+                        <h3 class="serif-h3">Pertanyaan seputar penyeduhan &amp; penyimpanan</h3>
+                    </div>
+                    <div class="spec-accordion" style="margin-top:0;">
+                        <div class="spec-acc-item">
+                            <button type="button" class="spec-acc-btn" onclick="toggleAccordion(this)">
+                                <span>Bagaimana rasio seduh terbaik untuk Arabica Wine &amp; Blue Mountain?</span>
+                                <span>+</span>
+                            </button>
+                            <div class="spec-acc-panel">Gunakan rasio 1:15 (15 gram kopi untuk 225 ml air) dengan gilingan medium-coarse dan suhu air 90–92°C. Lakukan blooming selama 35 detik agar aroma buah terbuka maksimal.</div>
+                        </div>
+                        <div class="spec-acc-item">
+                            <button type="button" class="spec-acc-btn" onclick="toggleAccordion(this)">
+                                <span>Berapa lama masa resting terbaik setelah tanggal sangrai (roast date)?</span>
+                                <span>+</span>
+                            </button>
+                            <div class="spec-acc-panel">Untuk kopi proses Wine dan Natural Anaerob, masa resting optimal adalah 10–14 hari setelah sangrai. Simpan di kemasan katup satu arah (one-way valve) di tempat sejuk dan kering.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. DIRECT ORDER SECTION ("Kami memilih tradisi bersama petani.") -->
+        <section id="pesan" class="section-block" style="background-color: var(--bg-surface); border-top:1px solid var(--border-sand); border-bottom:1px solid var(--border-sand);">
+            <div class="container split-form-section">
+                <div>
+                    <span class="eyebrow">PESAN LANGSUNG</span>
+                    <h2 class="serif-h2">Kami memilih tradisi bersama petani.</h2>
+                    <p style="color:var(--text-secondary); margin-top:0.85rem; font-size:0.95rem;">Pesan biji kopi segar langsung dari roastery Nala di Bondowoso. Kami menyiapkan gilingan sesuai alat seduh Anda di rumah maupun kedai.</p>
+
+                    <div class="checklist-cards">
+                        <div class="check-row-card">
+                            <span class="check-icon">&#10003;</span>
+                            <span>Disangrai segar berdasarkan pesanan (Fresh Roast)</span>
+                        </div>
+                        <div class="check-row-card">
+                            <span class="check-icon">&#10003;</span>
+                            <span>Pilihan Biji Utuh, Giling Halus, Medium, atau Kasar</span>
+                        </div>
+                        <div class="check-row-card">
+                            <span class="check-icon">&#10003;</span>
+                            <span>Pengiriman aman ke seluruh Indonesia dari Bondowoso</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-dark-frame">
+                    <form class="form-card-light" id="quickOrderForm" onsubmit="handleQuickOrderSubmit(event)">
+                        <h3 class="serif-h3" style="margin-bottom:0.25rem;">Pesan Kopi Nala</h3>
+                        <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1.15rem;">Isi detail pesanan untuk terhubung langsung dengan tim Nala.</p>
+
+                        <div class="form-group">
+                            <label for="qoName">Nama Lengkap *</label>
+                            <input type="text" id="qoName" class="form-control" placeholder="Contoh: Raka Pratama" required>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="qoProduct">Varian Kopi *</label>
+                                <select id="qoProduct" class="form-control">
+                                    <option value="Arabica Wine (Rp 95.000)">Arabica Wine — Rp 95.000</option>
+                                    <option value="Robusta Ijen (Rp 70.000)">Robusta Ijen — Rp 70.000</option>
+                                    <option value="Blue Mountain (Rp 95.000)">Blue Mountain — Rp 95.000</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="qoWeight">Ukuran Kemasan</label>
+                                <select id="qoWeight" class="form-control">
+                                    <option value="200g">200 Gram</option>
+                                    <option value="100g">100 Gram</option>
+                                    <option value="500g">500 Gram</option>
+                                    <option value="1kg">1 Kilogram</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="qoGrind">Bentuk Kopi</label>
+                                <select id="qoGrind" class="form-control">
+                                    <option value="Biji Utuh (Whole Bean)">Biji Utuh (Whole Bean)</option>
+                                    <option value="Giling Medium (V60 / Filter)">Giling Medium (Filter)</option>
+                                    <option value="Giling Halus (Espresso / Tubruk)">Giling Halus (Espresso)</option>
+                                    <option value="Giling Kasar (French Press)">Giling Kasar (French Press)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="qoWhatsapp">Nomor WhatsApp *</label>
+                                <input type="tel" id="qoWhatsapp" class="form-control" placeholder="+62 812-xxxx-xxxx" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qoNotes">Catatan Tambahan</label>
+                            <input type="text" id="qoNotes" class="form-control" placeholder="Alamat pengiriman atau catatan khusus">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Kirim Pesanan via WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. B2B PARTNERSHIP SECTION ("Untuk Cafe, Roasters, Reseller, dan Komunitas Kopi.") -->
+        <section id="mitra" class="section-block">
+            <div class="container split-form-section">
+                <div>
+                    <span class="eyebrow">KEMITRAAN B2B</span>
+                    <h2 class="serif-h2">Untuk Cafe, Roasters, Reseller, dan Komunitas Kopi.</h2>
+                    <p style="color:var(--text-secondary); margin-top:0.85rem; font-size:0.95rem;">Nala menyediakan pasokan green bean maupun roasted bean Java Ijen dengan konsistensi profil rasa, sampel cupping, dan harga grosir untuk kebutuhan kedai kopi serta mitra distribusi.</p>
+
+                    <div class="b2b-contact-pills">
+                        <a href="https://wa.me/6282335553135" target="_blank" rel="noopener" class="btn btn-outline btn-sm">WhatsApp +62 823-3555-3135</a>
+                        <a href="mailto:nala.coffeeroastery@gmail.com" class="btn btn-outline btn-sm">nala.coffeeroastery@gmail.com</a>
+                    </div>
+                </div>
+
+                <form class="form-card-light" id="b2bForm" onsubmit="handleB2bSubmit(event)">
+                    <h3 class="serif-h3" style="margin-bottom:0.25rem;">Formulir Kemitraan</h3>
+                    <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1.15rem;">Diskusikan kebutuhan suplai green bean, house blend, atau white label.</p>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="b2bName">Nama PIC *</label>
+                            <input type="text" id="b2bName" class="form-control" placeholder="Nama Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="b2bBrand">Nama Usaha / Cafe *</label>
+                            <input type="text" id="b2bBrand" class="form-control" placeholder="Nama Kedai / Roastery" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="b2bType">Jenis Kemitraan</label>
+                            <select id="b2bType" class="form-control">
+                                <option value="Suplai Roasted Bean Cafe">Suplai Roasted Bean Cafe</option>
+                                <option value="Green Bean (Biji Mentah)">Green Bean (Biji Mentah)</option>
+                                <option value="Reseller / Distributor">Reseller / Distributor</option>
+                                <option value="Permintaan Sample Cupping">Permintaan Sample Cupping</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="b2bVolume">Estimasi Kebutuhan / Bulan</label>
+                            <select id="b2bVolume" class="form-control">
+                                <option value="5 - 15 Kg">5 – 15 Kg</option>
+                                <option value="15 - 50 Kg">15 – 50 Kg</option>
+                                <option value="50+ Kg">50+ Kg</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="b2bContact">Kontak WhatsApp / Email *</label>
+                        <input type="text" id="b2bContact" class="form-control" placeholder="Nomor WA atau alamat email aktif" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Ajukan Kemitraan Nala</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======================================================================
+         VIEW 2: PRODUCT DETAIL VIEW (PRODUK 1, PRODUK 2, PRODUK 3)
+         ====================================================================== -->
+    <section id="view-product" class="page-view" aria-live="polite">
+        <div class="container detail-page-wrap">
+            <span class="eyebrow" id="pdBreadcrumb">KOPI JAVA IJEN · ARABICA</span>
+            <h1 class="serif-h1" id="pdMainTitle">Arabica Wine</h1>
+            <a href="#kopi" class="back-link" onclick="navigateTo('home', 'kopi'); return false;">&larr; KEMBALI KE SEMUA KOPI</a>
+
+            <div class="product-detail-box">
+                <!-- Left Column: Packaging Card -->
+                <div id="pdArtworkContainer"></div>
+
+                <!-- Right Column: Product Specifications -->
+                <div>
+                    <span class="pill-tag pill-tag--outline" id="pdProcessBadge">WINE PROCESSING</span>
+                    <h2 class="serif-h2" style="margin-top:0.85rem; margin-bottom:0.25rem;" id="pdSubTitle">Arabica Wine</h2>
+                    <div class="spotlight-origin" id="pdOriginLine">IJEN JAVA, BONDOWOSO · 1.200–1.400 MDPL</div>
+
+                    <p class="spotlight-desc" id="pdPara1"></p>
+                    <p class="spotlight-desc" id="pdPara2"></p>
+
+                    <div class="tag-row" style="align-items:center;">
+                        <span class="tag-chip" id="pdTagBean">100% ARABIKA</span>
+                        <span class="tag-chip" id="pdTagRoast">MEDIUM ROAST</span>
+                        <span class="tag-chip" id="pdTagVariety">MIX VARIETY</span>
+                        <div class="weight-selector-pill" id="pdWeightSelector" role="group" aria-label="Pilih Berat Kemasan">
+                            <button type="button" class="weight-opt" data-mult="0.55" data-label="100G" onclick="selectDetailWeight(this)">100G</button>
+                            <button type="button" class="weight-opt active" data-mult="1" data-label="200G" onclick="selectDetailWeight(this)">200G</button>
+                            <button type="button" class="weight-opt" data-mult="2.3" data-label="500G" onclick="selectDetailWeight(this)">500G</button>
+                            <button type="button" class="weight-opt" data-mult="4.4" data-label="1KG" onclick="selectDetailWeight(this)">1KG</button>
+                        </div>
+                    </div>
+
+                    <div class="karakter-block">
+                        <div class="karakter-title">KARAKTER KOPI</div>
+                        <div class="stat-bar-row">
+                            <span class="stat-bar-label">BODY</span>
+                            <div class="stat-bar-track"><div class="stat-bar-fill" id="pdBarBody" style="width:50%;"></div></div>
+                            <span class="stat-bar-val" id="pdValBody">5/10</span>
+                        </div>
+                        <div class="stat-bar-row">
+                            <span class="stat-bar-label">ACIDITY</span>
+                            <div class="stat-bar-track"><div class="stat-bar-fill" id="pdBarAcidity" style="width:60%;"></div></div>
+                            <span class="stat-bar-val" id="pdValAcidity">6/10</span>
+                        </div>
+                        <div class="stat-bar-row">
+                            <span class="stat-bar-label">FRUITY</span>
+                            <div class="stat-bar-track"><div class="stat-bar-fill" id="pdBarFruity" style="width:80%;"></div></div>
+                            <span class="stat-bar-val" id="pdValFruity">8/10</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-price-cta">
+                        <div class="detail-price-text" id="pdPriceDisplay">Rp 95.000</div>
+                        <button type="button" class="btn btn-primary" id="pdBuyBtn">BELI SEKARANG</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 3: JOURNAL DETAIL VIEW (JURNAL 1 - JURNAL 5)
+         ====================================================================== -->
+    <section id="view-journal" class="page-view" aria-live="polite">
+        <div class="container detail-page-wrap">
+            <a href="#jurnal" class="back-link" style="margin-top:0; margin-bottom:1rem;" onclick="navigateTo('home', 'jurnal'); return false;">&larr; KEMBALI KE JURNAL NALA</a>
+            <div>
+                <span class="pill-tag" id="jdCategoryTag">STORYTELLING</span>
+            </div>
+            <h1 class="serif-h1" style="margin-top:0.85rem; max-width:720px;" id="jdMainTitle">Kopi dan Tanah yang Menjaganya</h1>
+
+            <div class="journal-detail-grid">
+                <!-- Left Column: Hero Photo + Editorial Copy -->
+                <div>
+                    <div class="journal-hero-media">
+                        <img id="jdHeroImg" src="" alt="Ilustrasi artikel jurnal Nala">
+                        <div class="journal-location-badge">
+                            <span class="pill-tag pill-tag--white"><i class="dot-amber"></i> <span id="jdLocationText">KEBUN KOPI, BONDOWOSO</span></span>
+                        </div>
+                    </div>
+
+                    <div class="journal-article-copy">
+                        <h2 id="jdSubheading">Tanah menyimpan cerita rasa</h2>
+                        <p id="jdPara1"></p>
+                        <p id="jdPara2"></p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Summary Card + Next Article Card -->
+                <aside>
+                    <div class="journal-sidebar-card">
+                        <span class="eyebrow" id="jdSideEyebrow">DARI KEBUN KE CANGKIR</span>
+                        <h3 id="jdSideQuote">Rasa selalu punya akar cerita.</h3>
+                        <p id="jdSideSummary">Tanah, iklim, dan tangan petani bertemu dalam setiap buah kopi yang dipanen dengan cermat.</p>
+
+                        <div class="journal-meta-grid">
+                            <div class="j-meta-item">
+                                <span class="j-meta-icon">+</span>
+                                <div>
+                                    <span class="j-meta-lbl">WAKTU BACA</span>
+                                    <span class="j-meta-val" id="jdReadTime">5 menit</span>
+                                </div>
+                            </div>
+                            <div class="j-meta-item">
+                                <span class="j-meta-icon">&#10003;</span>
+                                <div>
+                                    <span class="j-meta-lbl">DIPERBARUI</span>
+                                    <span class="j-meta-val" id="jdUpdatedDate">Oktober 2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="next-article-box">
+                        <span class="eyebrow">LANJUT MENJELAJAH</span>
+                        <h3 class="serif-h3">Cerita di balik rasa</h3>
+                        <div class="next-article-card" id="jdNextCard">
+                            <img id="jdNextImg" src="" alt="Artikel pilihan berikutnya">
+                            <div>
+                                <span class="eyebrow" style="margin-bottom:0.2rem; font-size:0.65rem;" id="jdNextTag">ARTIKEL PILIHAN</span>
+                                <div style="font-family:var(--font-serif); font-weight:700; font-size:1.02rem; line-height:1.25;" id="jdNextTitle">Cerita petani di lereng Ijen</div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================================================
+         GLOBAL FOOTER (EXACT MATCH ACROSS ALL SCREENS)
+         ====================================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#home" class="brand-logo" onclick="navigateTo('home'); return false;" aria-label="Nala Coffee">
+                        <svg width="84" height="34" viewBox="0 0 110 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 35V9H14.5L27.5 26.5V9H33.5V35H27.5L14 17V35H8Z" fill="#B59B78"/>
+                            <path d="M18 11C21 7 26 7 28 11C24 11 21 12 18 11Z" fill="#C68B1B"/>
+                            <text x="35" y="35" fill="#B59B78" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="31" letter-spacing="-0.03em">ala</text>
+                        </svg>
+                    </a>
+                    <p class="footer-tagline">Kopi Ijen yang tumbuh dari kebaikan.</p>
+                </div>
+
+                <div>
+                    <div class="footer-col-title-eyebrow">JELAJAHI</div>
+                    <div class="footer-nav-inline">
+                        <a href="#cerita" onclick="navigateTo('home', 'cerita'); return false;">Cerita</a>
+                        <a href="#kopi" onclick="navigateTo('home', 'kopi'); return false;">Kopi</a>
+                        <a href="#jurnal" onclick="navigateTo('home', 'jurnal'); return false;">Artikel</a>
+                        <a href="#petani" onclick="navigateTo('home', 'petani'); return false;">Galeri</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="footer-col-title-serif">Kontak</div>
+                    <div class="footer-text-list">
+                        <a href="https://wa.me/6282335553135" target="_blank" rel="noopener">WhatsApp +62 823-3555-3135</a>
+                        <a href="mailto:nala.coffeeroastery@gmail.com">nala.coffeeroastery@gmail.com</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="footer-col-title-serif">Mitra Pemasaran</div>
+                    <div class="footer-text-list">
+                        <span>Supported by MEA</span>
+                        <span>PT. Madani Internusa Utama</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 Nala Coffee &middot; Kelompok Usaha Bersama Bondowoso</span>
+                <span>Dibuat dengan rasa hormat untuk petani Ijen.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================================================
+         CHECKOUT / ORDER MODAL & GALLERY LIGHTBOX
+         ====================================================================== -->
+    <div class="modal-backdrop" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderModalTitle">
+        <div class="modal-dialog">
+            <button type="button" class="modal-close" onclick="closeModal('orderModal')" aria-label="Tutup">&times;</button>
+            <span class="eyebrow">CHECKOUT LANGSUNG</span>
+            <h3 class="serif-h3" id="orderModalTitle">Pesan Arabica Wine</h3>
+            <p style="font-size:0.84rem; color:var(--text-secondary); margin-bottom:1.15rem;">Fresh roast dari Bondowoso, siap dikirim atau dipesan via WhatsApp.</p>
+
+            <form id="modalOrderForm" onsubmit="submitModalOrder(event)">
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label for="moWeight">Berat Kemasan</label>
+                        <select id="moWeight" class="form-control" onchange="recalcModalTotal()">
+                            <option value="0.55" data-label="100g">100g</option>
+                            <option value="1" data-label="200g" selected>200g (Standar)</option>
+                            <option value="2.3" data-label="500g">500g</option>
+                            <option value="4.4" data-label="1kg">1kg</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="moGrind">Pilihan Gilingan</label>
+                        <select id="moGrind" class="form-control">
+                            <option value="Biji Utuh">Biji Utuh (Whole Bean)</option>
+                            <option value="Giling Medium">Giling Medium (V60/Filter)</option>
+                            <option value="Giling Halus">Giling Halus (Espresso/Tubruk)</option>
+                            <option value="Giling Kasar">Giling Kasar (French Press)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="display:flex; align-items:center; justify-content:space-between; background:var(--bg-surface); padding:0.75rem 1rem; border-radius:var(--radius-sm);">
+                    <span style="font-size:0.8rem; font-weight:700;">Jumlah Kemasan</span>
+                    <div class="qty-control">
+                        <button type="button" onclick="adjustModalQty(-1)" aria-label="Kurangi jumlah">-</button>
+                        <span id="moQtyVal">1</span>
+                        <button type="button" onclick="adjustModalQty(1)" aria-label="Tambah jumlah">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="moCustomer">Nama Pemesan *</label>
+                    <input type="text" id="moCustomer" class="form-control" placeholder="Masukkan nama Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="moAddress">Kota / Alamat Pengiriman *</label>
+                    <input type="text" id="moAddress" class="form-control" placeholder="Contoh: Surabaya / Jakarta Selatan" required>
+                </div>
+
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:0.95rem 0; border-top:1px solid var(--border-sand); margin-top:0.5rem;">
+                    <span style="font-size:0.82rem; color:var(--text-secondary); font-weight:600;">Total Estimasi</span>
+                    <span style="font-family:var(--font-serif); font-size:1.35rem; font-weight:700;" id="moTotalDisplay">Rp 95.000</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%;">Konfirmasi &amp; Lanjut ke WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Pratinjau Foto Galeri">
+        <div class="modal-dialog" style="max-width:680px; padding:1rem;">
+            <button type="button" class="modal-close" onclick="closeModal('lightboxModal')" aria-label="Tutup">&times;</button>
+            <img id="lightboxImg" src="" alt="" style="width:100%; max-height:440px; border-radius:var(--radius-md);">
+            <div style="padding:0.85rem 0.35rem 0.25rem;">
+                <span class="eyebrow" id="lightboxTag">DOKUMENTASI IJEN</span>
+                <h4 class="serif-h3" id="lightboxCaption">Judul Foto</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toastBox" role="status" aria-live="polite">
+        <span class="dot-amber"></span>
+        <span id="toastMsg">Pesan terkirim!</span>
+    </div>
+
+    <!-- ======================================================================
+         JAVASCRIPT APPLICATION ENGINE
+         ====================================================================== -->
+    <script>
+        /* ----------------------------------------------------------------------
+           1. STRUCTURED DATA REPOSITORY (FROM FIGMA SCREENS)
+           ---------------------------------------------------------------------- */
+        const HERO_SLIDES = [
+            {
+                eyebrow: "KOPI SPECIALTY JAVA IJEN",
+                title: "Rasakan Kebaikan <em>dari Lereng Ijen</em>",
+                desc: "Biji kopi pilihan dari dataran tinggi vulkanik Bondowoso, dirawat oleh petani lokal dan disangrai dengan penuh ketelitian untuk menjaga kejujuran rasa.",
+                location: "IJEN JAVA, BONDOWOSO",
+                caption: "Roastery & Kebun Ijen",
+                img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=80"
+            },
+            {
+                eyebrow: "WINE & ANAEROB SERIES",
+                title: "Fermentasi Alami <em>Penuh Karakter Buah</em>",
+                desc: "Eksplorasi pasca panen 150 jam anaerob dan wine processing yang melahirkan aroma buah tropis dan manis alami.",
+                location: "1.200–1.600 MDPL, BONDOWOSO",
+                caption: "Koleksi Single Origin",
+                img: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1400&q=80"
+            },
+            {
+                eyebrow: "PETANI MITRA BONDOWOSO",
+                title: "Tangan yang Merawat <em>Sebelum Menyeduh</em>",
+                desc: "Setiap panen petik merah menjaga kesuburan ekosistem pegunungan Ijen sekaligus meningkatkan nilai tambah keluarga petani.",
+                location: "KELOMPOK USAHA BERSAMA",
+                caption: "Panen Petik Merah",
+                img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=80"
+            },
+            {
+                eyebrow: "KEMITRAAN ROASTERY & CAFE",
+                title: "Pasokan Konsisten <em>Untuk Kedai Anda</em>",
+                desc: "Tersedia green bean dan fresh roasted bean Java Ijen untuk kebutuhan house blend, manual brew, hingga reseller.",
+                location: "BONDOWOSO — SELURUH INDONESIA",
+                caption: "Solusi B2B Nala",
+                img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1400&q=80"
+            }
+        ];
+
+        const PRODUCTS = {
+            "arabica-wine": {
+                id: "arabica-wine",
+                category: "arabika",
+                special: true,
+                theme: "wine",
+                breadcrumb: "KOPI JAVA IJEN · ARABICA",
+                title: "Arabica Wine",
+                pkgTitle: "Arabika Wine",
+                process: "WINE PROCESSING",
+                originLine: "IJEN JAVA, BONDOWOSO · 1.200–1.400 MDPL",
+                para1: "Arabika Wine Ijen adalah hasil dari proses alami yang unik. Biji kopi difermentasi alami dalam ceri selama satu bulan, hingga rasa manis buah dan keasaman khas muncul secara natural.",
+                para2: "Kopi ini bukan untuk semua orang. Bagi kamu yang berani menjelajah rasa, Arabica Wine membuka pengalaman baru.",
+                beanTag: "100% ARABIKA",
+                roastTag: "MEDIUM ROAST",
+                varietyTag: "MIX VARIETY",
+                altitudeSpec: "1000-1300 MASL",
+                pouchLabel: "ARABICA WINE",
+                pouchBadge: "WINE",
+                body: 5,
+                acidity: 6,
+                fruity: 8,
+                dotsBody: 3,
+                dotsAcidity: 3,
+                dotsFruity: 4,
+                basePrice: 95000,
+                shortDesc: "Fermentasi ceri alami 30 hari dengan aroma buah merah, manis madu, dan keasaman segar."
+            },
+            "robusta-ijen": {
+                id: "robusta-ijen",
+                category: "robusta",
+                special: false,
+                theme: "robusta",
+                breadcrumb: "KOPI JAVA IJEN · ROBUSTA",
+                title: "Robusta Ijen",
+                pkgTitle: "Robusta Ijen",
+                process: "FULLWASH PROCESSING",
+                originLine: "IJEN JAVA, BONDOWOSO · 800–1.000 MDPL",
+                para1: "Robusta Ijen menghadirkan karakter kopi yang tegas dan tumbuh di dataran tinggi Ijen, Bondowoso. Proses fullwash menjaga cita rasa bersih dengan aroma panggang yang khas.",
+                para2: "Pilihan tepat untuk rutinitas harian, terutama bagi penikmat seduhan dengan body kuat dan rasa berani.",
+                beanTag: "100% ROBUSTA",
+                roastTag: "MEDIUM ROAST",
+                varietyTag: "MIX VARIETY",
+                altitudeSpec: "800-1000 MASL",
+                pouchLabel: "ROBUSTA IJEN",
+                pouchBadge: "ROBUSTA",
+                body: 8,
+                acidity: 5,
+                fruity: 7,
+                dotsBody: 4,
+                dotsAcidity: 1,
+                dotsFruity: null,
+                basePrice: 70000,
+                shortDesc: "Body tebal dengan aroma cokelat hitam, kacang sangrai, dan aftertaste bersih khas fullwash."
+            },
+            "blue-mountain": {
+                id: "blue-mountain",
+                category: "arabika",
+                special: true,
+                theme: "blue",
+                breadcrumb: "KOPI IJEN · BLUE MOUNTAIN",
+                title: "Blue Mountain",
+                pkgTitle: "Blue Mountain",
+                process: "NATURAL ANAEROB 150 HRS",
+                originLine: "IJEN JAVA, BONDOWOSO · 1.600 MASL",
+                para1: "Blue Mountain menghadirkan karakter rasa yang bersih dan kompleks. Proses natural anaerob selama 150 jam membangun aroma khas dengan keseimbangan rasa yang menarik.",
+                para2: "Pilihan tepat bagi penikmat kopi yang ingin mengeksplorasi karakter acidity cerah dengan sentuhan rasa yang unik.",
+                beanTag: "100% ARABIKA",
+                roastTag: "MEDIUM ROAST",
+                varietyTag: "SINGLE VARIETY",
+                altitudeSpec: "1600 MASL",
+                pouchLabel: "BLUE MOUNTAIN",
+                pouchBadge: "IJEN 1600",
+                body: 8,
+                acidity: 5,
+                fruity: 7,
+                dotsBody: 1,
+                dotsAcidity: 5,
+                dotsFruity: null,
+                basePrice: 95000,
+                shortDesc: "Single origin 1.600 mdpl dengan proses natural anaerob 150 jam yang kompleks dan harum."
+            }
+        };
+
+        const ARTICLES = {
+            "jurnal-1": {
+                id: "jurnal-1",
+                category: "STORYTELLING",
+                title: "Kopi dan Tanah yang Menjaganya",
+                location: "KEBUN KOPI, BONDOWOSO",
+                subheading: "Tanah menyimpan cerita rasa",
+                para1: "Sebelum menjadi biji yang disangrai, kopi tumbuh sebagai buah kecil di antara daun yang dijaga sepanjang musim. Tanah dan iklim memberi pengaruh pada pertumbuhan, sementara pilihan saat panen ikut menentukan kualitas bahan yang diolah.",
+                para2: "Bagi Nala, memahami kopi berarti menghargai seluruh perjalanan itu. Bukan hanya mengejar rasa di akhir, tetapi juga menjaga asal-usul yang membuatnya berarti.",
+                sideEyebrow: "DARI KEBUN KE CANGKIR",
+                sideQuote: "Rasa selalu punya akar cerita.",
+                sideSummary: "Tanah, iklim, dan tangan petani bertemu dalam setiap buah kopi yang dipanen dengan cermat.",
+                readTime: "5 menit",
+                updated: "Oktober 2026",
+                img: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1000&q=80",
+                nextId: "jurnal-2",
+                nextTag: "ARTIKEL PILIHAN",
+                nextTitle: "Cerita petani di lereng Ijen"
+            },
+            "jurnal-2": {
+                id: "jurnal-2",
+                category: "PETANI",
+                title: "Cerita Petani di Lereng Ijen",
+                location: "LERENG IJEN, JAWA TIMUR",
+                subheading: "Menjaga kebun, menjaga harapan",
+                para1: "Di lereng Ijen, petani memahami perubahan cuaca, waktu panen, dan kondisi tanaman melalui pengalaman bertahun-tahun. Setiap musim membawa tantangan baru, tetapi perawatan yang telaten membantu menjaga kualitas buah yang dipetik.",
+                para2: "Ketika kopi dihargai dengan lebih adil, manfaatnya dapat kembali ke keluarga dan lingkungan sekitar. Itulah alasan cerita petani menjadi bagian penting dari cerita Nala.",
+                sideEyebrow: "CERITA PETANI",
+                sideQuote: "Di balik panen, ada ketekunan.",
+                sideSummary: "Merawat kebun bukan pekerjaan sehari. Ia tumbuh dari pengetahuan, pengalaman, dan harapan.",
+                readTime: "4 menit",
+                updated: "Oktober 2026",
+                img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+                nextId: "jurnal-5",
+                nextTag: "ARTIKEL PILIHAN",
+                nextTitle: "Dari lereng Ijen, secangkir cerita"
+            },
+            "jurnal-3": {
+                id: "jurnal-3",
+                category: "PROSES KOPI",
+                title: "Dari Buah Kopi Menjadi Secangkir Kopi",
+                location: "PROSES KOPI NALA",
+                subheading: "Perjalanan panjang dalam setiap cangkir",
+                para1: "Perjalanan kopi dimulai dari buah yang dipetik saat matang. Setelah itu, biji diproses, dikeringkan, dan disortir untuk menjaga konsistensi. Setiap tahap membutuhkan perhatian agar karakter yang dibangun di kebun tetap terasa saat kopi diseduh.",
+                para2: "Di roastery, profil sangrai disesuaikan dengan karakter biji. Tujuannya bukan menutupi asal kopi, melainkan membantu aroma dan rasa terbaiknya muncul dengan seimbang.",
+                sideEyebrow: "PROSES NALA",
+                sideQuote: "Rasa yang baik dirawat bertahap.",
+                sideSummary: "Dari pemetikan hingga sangrai, setiap langkah berperan menjaga karakter alami biji kopi.",
+                readTime: "3 menit",
+                updated: "Oktober 2026",
+                img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1000&q=80",
+                nextId: "jurnal-4",
+                nextTag: "ARTIKEL PILIHAN",
+                nextTitle: "Mengenal karakter kopi Java Ijen"
+            },
+            "jurnal-4": {
+                id: "jurnal-4",
+                category: "EDUKASI KOPI",
+                title: "Mengenal Karakter Kopi Java Ijen",
+                location: "JAVA IJEN, BONDOWOSO",
+                subheading: "Rasa yang lahir dari tempatnya tumbuh",
+                para1: "Kopi Java Ijen tumbuh di kawasan pegunungan dengan udara sejuk dan tanah vulkanik. Lingkungan ini memberi fondasi karakter yang menarik untuk dieksplorasi, dari aroma yang hangat hingga rasa yang terasa seimbang di cangkir.",
+                para2: "Kenali preferensimu pelan-pelan. Tingkat sangrai dan metode seduh bisa mengubah pengalaman rasa, jadi tak perlu terburu-buru menemukan satu kopi favorit.",
+                sideEyebrow: "EDUKASI KOPI",
+                sideQuote: "Setiap biji punya karakter sendiri.",
+                sideSummary: "Asal tumbuh, proses, dan sangrai membentuk aroma serta rasa yang khas di setiap seduhan.",
+                readTime: "5 menit",
+                updated: "Oktober 2026",
+                img: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=1000&q=80",
+                nextId: "jurnal-2",
+                nextTag: "ARTIKEL PILIHAN",
+                nextTitle: "Cerita petani di lereng Ijen"
+            },
+            "jurnal-5": {
+                id: "jurnal-5",
+                category: "CERITA NALA",
+                title: "Dari Lereng Ijen, Secangkir Kopi yang Punya Cerita",
+                location: "BONDOWOSO, JAWA TIMUR",
+                subheading: "Sebuah cerita dimulai dari tanah",
+                para1: "Di lereng Ijen, Bondowoso, pagi datang bersama udara sejuk dan embun yang perlahan menghilang dari daun kopi. Bagi petani, hari dimulai jauh sebelum secangkir kopi diseduh. Ada kebun yang dirawat, buah yang dipilih, dan kesabaran yang terus dijaga.",
+                para2: "Nala percaya kualitas bukan hanya soal rasa. Ia juga tentang bagaimana kopi tumbuh, siapa yang merawatnya, dan bagaimana hasil panen memberi nilai bagi keluarga petani.",
+                sideEyebrow: "CERITA DARI KEBUN",
+                sideQuote: "Lebih dari sekadar biji kopi.",
+                sideSummary: "Di balik setiap cangkir, ada tanah yang dirawat, tangan yang bekerja, dan proses yang dijaga.",
+                readTime: "4 menit",
+                updated: "Oktober 2026",
+                img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1000&q=80",
+                nextId: "jurnal-1",
+                nextTag: "ASAL KOPI",
+                nextTitle: "Kopi dan tanah yang menjaganya"
+            }
+        };
+
+        const GALLERY_ITEMS = [
+            { cat: "kebun", title: "Panen Petik Merah di Kebun Bondowoso", img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80" },
+            { cat: "kebun", title: "Ceri Kopi Matang di Dataran Tinggi Ijen", img: "https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?auto=format&fit=crop&w=700&q=80" },
+            { cat: "roastery", title: "Proses Sangrai Batch Kecil di Roastery", img: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80" },
+            { cat: "kebun", title: "Lanskap Pagi Pegunungan Java Ijen", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=700&q=80" },
+            { cat: "proses", title: "Penyimpanan Green Bean dalam Karung Goni", img: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80" },
+            { cat: "roastery", title: "Evaluasi Aroma & Quality Control Biji Sangrai", img: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=700&q=80" }
+        ];
+
+        /* ----------------------------------------------------------------------
+           2. HELPER RENDERERS
+           ---------------------------------------------------------------------- */
+        function formatRupiah(num) {
+            return "Rp " + Math.round(num).toLocaleString("id-ID");
+        }
+
+        function renderDots(count) {
+            let html = '<span class="dots-group">';
+            for (let i = 1; i <= 5; i++) {
+                html += `<i class="dot-spec ${i <= count ? 'filled' : ''}"></i>`;
+            }
+            html += '</span>';
+            return html;
+        }
+
+        function buildPackagingHTML(prod) {
+            const fruityRow = prod.dotsFruity !== null
+                ? `<div class="pkg-dots-row"><span>FRUITY</span>${renderDots(prod.dotsFruity)}</div>`
+                : '';
+
+            return `
+                <div class="pkg-artwork pkg-artwork--${prod.theme}">
+                    <div class="pkg-art-head">
+                        <div class="pkg-art-title">${prod.pkgTitle}</div>
+                        <div class="pkg-art-sub">IJEN JAVA, BONDOWOSO</div>
+                    </div>
+                    <div class="pkg-art-body">
+                        <div class="coffee-pouch">
+                            <div class="pouch-brand">Nala</div>
+                            <div class="pouch-graphic">${prod.pouchBadge}</div>
+                            <div class="pouch-label-bar">${prod.pouchLabel}</div>
+                        </div>
+                        <div class="pkg-spec-list">
+                            <div>${prod.beanTag === '100% ARABIKA' && prod.id === 'blue-mountain' ? '100% ARABIKA SINGLE ORIGIN' : prod.beanTag}</div>
+                            <div>${prod.process}</div>
+                            <div>${prod.varietyTag}</div>
+                            <div>${prod.roastTag}</div>
+                            <div>${prod.altitudeSpec}</div>
+                            ${prod.id === 'blue-mountain'
+                                ? `<div class="pkg-dots-row"><span>ACIDITY</span>${renderDots(prod.dotsAcidity)}</div>
+                                   <div class="pkg-dots-row"><span>BODY</span>${renderDots(prod.dotsBody)}</div>`
+                                : `<div class="pkg-dots-row"><span>BODY</span>${renderDots(prod.dotsBody)}</div>
+                                   <div class="pkg-dots-row"><span>ACIDITY</span>${renderDots(prod.dotsAcidity)}</div>
+                                   ${fruityRow}`
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* ----------------------------------------------------------------------
+           3. CATALOG, JOURNAL & GALLERY RENDERING
+           ---------------------------------------------------------------------- */
+        let currentCatalogFilter = 'all';
+
+        function renderCatalogGrid(filter = 'all') {
+            currentCatalogFilter = filter;
+            const grid = document.getElementById('catalogGrid');
+            const items = Object.values(PRODUCTS).filter(p => {
+                if (filter === 'all') return true;
+                if (filter === 'special') return p.special;
+                return p.category === filter;
+            });
+
+            grid.innerHTML = items.map(p => `
+                <article class="product-card">
+                    <div style="cursor:pointer;" onclick="navigateTo('product', '${p.id}')">
+                        ${buildPackagingHTML(p)}
+                    </div>
+                    <div class="product-card-meta">${p.process}</div>
+                    <h3><a href="#product/${p.id}" onclick="navigateTo('product', '${p.id}'); return false;">${p.title}</a></h3>
+                    <p>${p.shortDesc}</p>
+                    <div class="product-card-price">${formatRupiah(p.basePrice)}</div>
+                    <div class="product-card-actions">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="openOrderModal('${p.id}')">Beli Sekarang</button>
+                        <button type="button" class="btn btn-outline btn-sm" onclick="navigateTo('product', '${p.id}')">Detail</button>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function filterProducts(filter, btnEl) {
+            if (btnEl) {
+                btnEl.parentElement.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+                btnEl.classList.add('active');
+            }
+            renderCatalogGrid(filter);
+        }
+
+        function setCatalogPage(page, btnEl) {
+            if (btnEl) {
+                btnEl.parentElement.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                btnEl.classList.add('active');
+            }
+            const grid = document.getElementById('catalogGrid');
+            const list = Object.values(PRODUCTS);
+            const ordered = page === 2 ? [...list.slice(1), list[0]] : list;
+            grid.innerHTML = ordered.map(p => `
+                <article class="product-card">
+                    <div style="cursor:pointer;" onclick="navigateTo('product', '${p.id}')">
+                        ${buildPackagingHTML(p)}
+                    </div>
+                    <div class="product-card-meta">${p.process}</div>
+                    <h3><a href="#product/${p.id}" onclick="navigateTo('product', '${p.id}'); return false;">${p.title}</a></h3>
+                    <p>${p.shortDesc}</p>
+                    <div class="product-card-price">${formatRupiah(p.basePrice)}</div>
+                    <div class="product-card-actions">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="openOrderModal('${p.id}')">Beli Sekarang</button>
+                        <button type="button" class="btn btn-outline btn-sm" onclick="navigateTo('product', '${p.id}')">Detail</button>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function renderJournalSubgrid(query = '') {
+            const subgrid = document.getElementById('journalSubgrid');
+            const subIds = ['jurnal-1', 'jurnal-2', 'jurnal-3', 'jurnal-4'];
+            const q = query.trim().toLowerCase();
+
+            const filtered = subIds
+                .map(id => ARTICLES[id])
+                .filter(a => !q || a.title.toLowerCase().includes(q) || a.category.toLowerCase().includes(q) || a.subheading.toLowerCase().includes(q));
+
+            if (filtered.length === 0) {
+                subgrid.innerHTML = `<div style="grid-column:1/-1; padding:1.5rem; background:#FFF; border-radius:var(--radius-md); border:1px solid var(--border-sand); color:var(--text-secondary);">Tidak ditemukan artikel yang cocok dengan kata kunci "<strong>${query}</strong>".</div>`;
+                return;
+            }
+
+            subgrid.innerHTML = filtered.map(a => `
+                <article class="journal-mini-card" onclick="navigateTo('journal', '${a.id}')">
+                    <img class="journal-mini-thumb" src="${a.img}" alt="${a.title}">
+                    <div class="journal-mini-info">
+                        <span class="eyebrow" style="font-size:0.64rem; margin-bottom:0;">${a.category}</span>
+                        <h4>${a.title}</h4>
+                        <span class="meta">${a.readTime} baca &middot; ${a.updated}</span>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function filterJournalCards(val) {
+            renderJournalSubgrid(val);
+        }
+
+        function renderGallery(cat = 'all') {
+            const grid = document.getElementById('galleryGrid');
+            const list = cat === 'all' ? GALLERY_ITEMS : GALLERY_ITEMS.filter(g => g.cat === cat);
+            grid.innerHTML = list.map((g, idx) => `
+                <div class="gallery-item" onclick="openLightbox('${g.img}', '${g.title}', '${g.cat.toUpperCase()}')">
+                    <img src="${g.img}" alt="${g.title}" loading="lazy">
+                    <div class="gallery-caption">${g.title}</div>
+                </div>
+            `).join('');
+        }
+
+        function filterGallery(cat, btnEl) {
+            if (btnEl) {
+                btnEl.parentElement.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+                btnEl.classList.add('active');
+            }
+            renderGallery(cat);
+        }
+
+        /* ----------------------------------------------------------------------
+           4. SPA ROUTING & DETAIL PAGE POPULATION
+           ---------------------------------------------------------------------- */
+        let activeDetailProduct = PRODUCTS["arabica-wine"];
+        let activeDetailMultiplier = 1;
+
+        function navigateTo(view, param = null) {
+            document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+
+            if (view === 'home') {
+                document.getElementById('view-home').classList.add('active');
+                if (param) {
+                    setTimeout(() => {
+                        const target = document.getElementById(param);
+                        if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    }, 40);
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } else if (view === 'product') {
+                const prod = PRODUCTS[param] || PRODUCTS["arabica-wine"];
+                populateProductDetail(prod);
+                document.getElementById('view-product').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (view === 'journal') {
+                const art = ARTICLES[param] || ARTICLES["jurnal-1"];
+                populateJournalDetail(art);
+                document.getElementById('view-journal').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function populateProductDetail(prod) {
+            activeDetailProduct = prod;
+            activeDetailMultiplier = 1;
+
+            document.getElementById('pdBreadcrumb').textContent = prod.breadcrumb;
+            document.getElementById('pdMainTitle').textContent = prod.title;
+            document.getElementById('pdArtworkContainer').innerHTML = buildPackagingHTML(prod);
+            document.getElementById('pdProcessBadge').textContent = prod.process;
+            document.getElementById('pdSubTitle').textContent = prod.title;
+            document.getElementById('pdOriginLine').textContent = prod.originLine;
+            document.getElementById('pdPara1').textContent = prod.para1;
+            document.getElementById('pdPara2').textContent = prod.para2;
+            document.getElementById('pdTagBean').textContent = prod.beanTag;
+            document.getElementById('pdTagRoast').textContent = prod.roastTag;
+            document.getElementById('pdTagVariety').textContent = prod.varietyTag;
+
+            document.getElementById('pdBarBody').style.width = (prod.body * 10) + '%';
+            document.getElementById('pdValBody').textContent = prod.body + '/10';
+            document.getElementById('pdBarAcidity').style.width = (prod.acidity * 10) + '%';
+            document.getElementById('pdValAcidity').textContent = prod.acidity + '/10';
+            document.getElementById('pdBarFruity').style.width = (prod.fruity * 10) + '%';
+            document.getElementById('pdValFruity').textContent = prod.fruity + '/10';
+
+            document.querySelectorAll('#pdWeightSelector .weight-opt').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.label === '200G');
+            });
+
+            document.getElementById('pdPriceDisplay').textContent = formatRupiah(prod.basePrice);
+            document.getElementById('pdBuyBtn').onclick = () => openOrderModal(prod.id, activeDetailMultiplier);
+        }
+
+        function selectDetailWeight(btn) {
+            document.querySelectorAll('#pdWeightSelector .weight-opt').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeDetailMultiplier = parseFloat(btn.dataset.mult);
+            document.getElementById('pdPriceDisplay').textContent = formatRupiah(activeDetailProduct.basePrice * activeDetailMultiplier);
+        }
+
+        function populateJournalDetail(art) {
+            document.getElementById('jdCategoryTag').textContent = art.category;
+            document.getElementById('jdMainTitle').textContent = art.title;
+            document.getElementById('jdHeroImg').src = art.img;
+            document.getElementById('jdHeroImg').alt = art.title;
+            document.getElementById('jdLocationText').textContent = art.location;
+            document.getElementById('jdSubheading').textContent = art.subheading;
+            document.getElementById('jdPara1').textContent = art.para1;
+            document.getElementById('jdPara2').textContent = art.para2;
+
+            document.getElementById('jdSideEyebrow').textContent = art.sideEyebrow;
+            document.getElementById('jdSideQuote').textContent = art.sideQuote;
+            document.getElementById('jdSideSummary').textContent = art.sideSummary;
+            document.getElementById('jdReadTime').textContent = art.readTime;
+            document.getElementById('jdUpdatedDate').textContent = art.updated;
+
+            const nextArt = ARTICLES[art.nextId] || ARTICLES["jurnal-1"];
+            document.getElementById('jdNextImg').src = nextArt.img;
+            document.getElementById('jdNextTag').textContent = art.nextTag;
+            document.getElementById('jdNextTitle').textContent = art.nextTitle;
+            document.getElementById('jdNextCard').onclick = () => navigateTo('journal', nextArt.id);
+        }
+
+        /* ----------------------------------------------------------------------
+           5. HERO CAROUSEL & ACCORDION INTERACTIONS
+           ---------------------------------------------------------------------- */
+        let heroIndex = 0;
+
+        function changeHeroSlide(delta) {
+            heroIndex = (heroIndex + delta + HERO_SLIDES.length) % HERO_SLIDES.length;
+            const slide = HERO_SLIDES[heroIndex];
+            document.getElementById('heroEyebrow').textContent = slide.eyebrow;
+            document.getElementById('heroTitle').innerHTML = slide.title;
+            document.getElementById('heroDesc').textContent = slide.desc;
+            document.getElementById('heroLocation').textContent = slide.location;
+            document.getElementById('heroBgImg').src = slide.img;
+            document.getElementById('heroSlideCounter').textContent = `0${heroIndex + 1} / 0${HERO_SLIDES.length}`;
+            document.getElementById('heroSlideCaption').textContent = slide.caption;
+        }
+
+        function toggleAccordion(btn) {
+            const item = btn.parentElement;
+            const isOpen = item.classList.contains('open');
+            item.classList.toggle('open');
+            btn.querySelector('span:last-child').textContent = isOpen ? '+' : '−';
+        }
+
+        /* ----------------------------------------------------------------------
+           6. ORDER MODAL, LIGHTBOX & FORM VALIDATION
+           ---------------------------------------------------------------------- */
+        let modalProduct = PRODUCTS["arabica-wine"];
+        let modalQty = 1;
+
+        function openOrderModal(productId, mult = 1) {
+            modalProduct = PRODUCTS[productId] || PRODUCTS["arabica-wine"];
+            modalQty = 1;
+            document.getElementById('orderModalTitle').textContent = `Pesan ${modalProduct.title}`;
+            document.getElementById('moQtyVal').textContent = '1';
+
+            const weightSelect = document.getElementById('moWeight');
+            for (let opt of weightSelect.options) {
+                if (parseFloat(opt.value) === mult) {
+                    opt.selected = true;
+                    break;
+                }
+            }
+            recalcModalTotal();
+            document.getElementById('orderModal').classList.add('open');
+        }
+
+        function adjustModalQty(delta) {
+            modalQty = Math.max(1, modalQty + delta);
+            document.getElementById('moQtyVal').textContent = modalQty;
+            recalcModalTotal();
+        }
+
+        function recalcModalTotal() {
+            const mult = parseFloat(document.getElementById('moWeight').value);
+            const total = modalProduct.basePrice * mult * modalQty;
+            document.getElementById('moTotalDisplay').textContent = formatRupiah(total);
+        }
+
+        function submitModalOrder(e) {
+            e.preventDefault();
+            const cust = document.getElementById('moCustomer').value.trim();
+            const addr = document.getElementById('moAddress').value.trim();
+            const weightOpt = document.getElementById('moWeight');
+            const weightLabel = weightOpt.options[weightOpt.selectedIndex].dataset.label;
+            const grind = document.getElementById('moGrind').value;
+            const total = document.getElementById('moTotalDisplay').textContent;
+
+            const msg = `Halo Nala Coffee, saya ingin memesan:%0A- Produk: ${modalProduct.title}%0A- Ukuran: ${weightLabel} (${grind})%0A- Jumlah: ${modalQty} pcs%0A- Estimasi Total: ${total}%0A- Nama: ${cust}%0A- Tujuan: ${addr}`;
+            closeModal('orderModal');
+            showToast(`Pesanan ${modalProduct.title} (${modalQty}x) disiapkan! Mengarahkan ke WhatsApp Nala...`);
+            window.open(`https://wa.me/6282335553135?text=${msg}`, '_blank', 'noopener');
+        }
+
+        function handleQuickOrderSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('qoName').value.trim();
+            const prod = document.getElementById('qoProduct').value;
+            const weight = document.getElementById('qoWeight').value;
+            const grind = document.getElementById('qoGrind').value;
+            const wa = document.getElementById('qoWhatsapp').value.trim();
+            const notes = document.getElementById('qoNotes').value.trim();
+
+            const msg = `Halo Nala Coffee, pesanan baru dari website:%0A- Nama: ${name}%0A- Kopi: ${prod}%0A- Kemasan: ${weight} (${grind})%0A- Kontak: ${wa}%0A- Catatan: ${notes || '-'}`;
+            showToast("Pesanan berhasil dibuat! Membuka WhatsApp Nala Coffee...");
+            window.open(`https://wa.me/6282335553135?text=${msg}`, '_blank', 'noopener');
+            e.target.reset();
+        }
+
+        function handleB2bSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('b2bName').value.trim();
+            const brand = document.getElementById('b2bBrand').value.trim();
+            const type = document.getElementById('b2bType').value;
+            const vol = document.getElementById('b2bVolume').value;
+            const contact = document.getElementById('b2bContact').value.trim();
+
+            const msg = `Halo Tim Mitra Nala Coffee, pengajuan kemitraan B2B:%0A- PIC: ${name} (${brand})%0A- Kebutuhan: ${type}%0A- Estimasi Volume: ${vol}/bulan%0A- Kontak: ${contact}`;
+            showToast(`Terima kasih ${name}! Pengajuan kemitraan untuk ${brand} telah diteruskan.`);
+            window.open(`https://wa.me/6282335553135?text=${msg}`, '_blank', 'noopener');
+            e.target.reset();
+        }
+
+        function openLightbox(src, caption, tag) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightboxCaption').textContent = caption;
+            document.getElementById('lightboxTag').textContent = tag;
+            document.getElementById('lightboxModal').classList.add('open');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
+        }
+
+        function showToast(text) {
+            const box = document.getElementById('toastBox');
+            document.getElementById('toastMsg').textContent = text;
+            box.classList.add('show');
+            setTimeout(() => box.classList.remove('show'), 4200);
+        }
+
+        /* ----------------------------------------------------------------------
+           7. MOBILE MENU & INITIALIZATION
+           ---------------------------------------------------------------------- */
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mobileDrawer.classList.toggle('open');
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+        });
+
+        function closeMobileMenu() {
+            mobileDrawer.classList.remove('open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) backdrop.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal('orderModal');
+                closeModal('lightboxModal');
+                closeMobileMenu();
+            }
+        });
+
+        // Initialize all dynamic sections on load
+        renderCatalogGrid('all');
+        renderJournalSubgrid('');
+        renderGallery('all');
+    </script>
+</body>
+</html>
