@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galeri | Nala Coffee</title>
+<meta name="description" content="Galeri kebun, proses, dan petani Nala.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="nav">
+  <div class="nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Nala Coffee – beranda"><img src="img/logo-nala.png" alt="Nala"></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Buka menu">
+    <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+    <nav class="nav-links" aria-label="Menu utama"><a href="cerita.html">Cerita</a><a href="kopi.html">Kopi</a><a href="proses.html">Proses</a><a href="petani.html">Petani</a><a href="mitra.html">Mitra</a></nav>
+    <div class="nav-cta"><a class="btn" href="mitra.html">Hubungi Nala</a></div>
+  </div>
+</header>
+<main>
+
+<div class="wrap">
+  <div class="gal-head"><h1>Yang tumbuh <em>di sekitar kami.</em></h1><p>Potongan cerita dari kebun, proses, dan orang-orang di balik setiap cangkir.</p></div>
+  <form class="gal-filter" onsubmit="return false" aria-label="Filter galeri"><b>Filter Galeri</b>
+    <select aria-label="Tanggal"><option>Tanggal: Semua</option></select>
+    <select aria-label="Hari"><option>Hari: Semua</option></select>
+    <select aria-label="Tahun"><option>Tahun: Semua</option><option>2026</option></select>
+    <select aria-label="Urutan"><option>Urutkan: Terbaru</option><option>Urutkan: Terlama</option></select>
+    <button class="btn" type="submit">Terapkan</button></form>
+  <div class="gal-grid gal-r1">
+    <figure style="--ar:362/163"><img src="img/galeri-petik.jpg" alt="Petani memetik buah kopi merah"></figure>
+    <figure style="--ar:241/163"><img src="img/galeri-tanah.jpg" alt="Biji kopi di tanah saat matahari terbit"></figure>
+    <figure style="--ar:291/163"><img src="img/galeri-roaster.jpg" alt="Proses sangrai kopi di roastery"></figure>
+  </div>
+  <div class="gal-grid gal-r2">
+    <figure style="--ar:220/135"><img src="img/galeri-lereng.jpg" alt="Lereng kebun kopi berkabut"></figure>
+    <figure style="--ar:383/135"><img src="img/galeri-karung.jpg" alt="Karung biji kopi di gudang"></figure>
+    <figure style="--ar:291/135"><img src="img/galeri-panen.jpg" alt="Petani memanen kopi bersama"></figure>
+  </div>
+  <div class="gal-pager"><a class="on" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">Lanjut →</a></div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="img/logo-nala.png" alt="Nala"><p>Kopi Ijen yang tumbuh dari kebaikan.</p></div>
+      <div><h4>Jelajahi</h4><div class="footer-links f-line"><a href="artikel-cerita-ijen.html">Cerita</a><a href="kopi.html">Kopi</a><a href="cerita.html">Artikel</a><a href="galeri.html">Galeri</a></div></div>
+      <div><h4 class="serif">Kontak</h4><ul><li><a href="https://wa.me/628235553135">WhatsApp +62 823-3555-3135</a></li><li><a href="mailto:nala.coffeeroastery@gmail.com">nala.coffeeroastery@gmail.com</a></li></ul></div>
+      <div><h4 class="serif">Mitra Pemasaran</h4><ul><li>Supported by MEA</li><li>PT. Madani Internusa Utama</li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Nala Coffee · Kelompok Usaha Bersama Bondowoso</span><span>Dibuat dengan rasa hormat untuk petani Ijen.</span></div>
+  </div>
+</footer>
+</body>
+</html>
